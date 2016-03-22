@@ -58,7 +58,7 @@ class Hook(GitHubCore):
         return self._boolean(self._delete(self._api), 204, 404)
 
     @requires_auth
-    def edit(self, config={}, events=[], add_events=[], rm_events=[],
+    def edit(self, config=None, events=None, add_events=None, rm_events=None,
              active=True):
         """Edit this hook.
 
@@ -73,6 +73,14 @@ class Hook(GitHubCore):
         :param bool active: (optional), should this event be active
         :returns: bool
         """
+        if config is None:
+                config = {}
+        if events is None:
+                events = []
+        if add_events is None:
+                add_events = []
+        if rm_events is None:
+                rm_events = []
         data = {'config': config, 'active': active}
         if events:
             data['events'] = events

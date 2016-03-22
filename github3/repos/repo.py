@@ -766,7 +766,7 @@ class Repository(GitHubCore):
         return self._instance_or_null(Repository, json)
 
     @requires_auth
-    def create_hook(self, name, config, events=['push'], active=True):
+    def create_hook(self, name, config, events=None, active=True):
         """Create a hook on this repository.
 
         :param str name: (required), name of the hook
@@ -778,6 +778,8 @@ class Repository(GitHubCore):
         :returns: :class:`Hook <github3.repos.hook.Hook>` if successful,
             otherwise None
         """
+        if events is None:
+                events = ['push']
         json = None
         if name and config and isinstance(config, dict):
             url = self._build_url('hooks', base_url=self._api)

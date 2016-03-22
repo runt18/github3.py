@@ -385,7 +385,7 @@ class Organization(BaseAccount):
         return self._boolean(self._delete(url), 204, 404)
 
     @requires_auth
-    def create_team(self, name, repo_names=[], permission=''):
+    def create_team(self, name, repo_names=None, permission=''):
         """Create a new team and return it.
 
         This only works if the authenticated user owns this organization.
@@ -404,6 +404,8 @@ class Organization(BaseAccount):
 
         :returns: :class:`Team <Team>`
         """
+        if repo_names is None:
+                repo_names = []
         data = {'name': name, 'repo_names': repo_names,
                 'permission': permission}
         url = self._build_url('teams', base_url=self._api)
