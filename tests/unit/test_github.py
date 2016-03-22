@@ -405,7 +405,7 @@ class TestGitHub(helper.UnitHelper):
         body = [('hub.mode', 'subscribe'),
                 topic,
                 ('hub.callback', 'https://localhost/post')]
-        data = dict([(k[4:], v) for k, v in body])
+        data = {k[4:]: v for k, v in body}
         self.instance.pubsubhubbub(**data)
         self.session.post.assert_called_once_with(
             url_for('hub'),
@@ -422,7 +422,7 @@ class TestGitHub(helper.UnitHelper):
                 topic,
                 ('hub.callback', 'https://localhost/post'),
                 ('hub.secret', 'secret')]
-        data = dict([(k[4:], v) for k, v in body])
+        data = {k[4:]: v for k, v in body}
         self.instance.pubsubhubbub(**data)
         self.session.post.assert_called_once_with(
             url_for('hub'),
@@ -438,7 +438,7 @@ class TestGitHub(helper.UnitHelper):
         body = [('hub.mode', 'subscribe'),
                 topic,
                 ('hub.callback', '')]
-        data = dict([(k[4:], v) for k, v in body])
+        data = {k[4:]: v for k, v in body}
         self.instance.pubsubhubbub(**data)
         assert self.session.post.called is False
 
@@ -451,7 +451,7 @@ class TestGitHub(helper.UnitHelper):
         body = [('hub.mode', ''),
                 topic,
                 ('hub.callback', 'https://localhost/post')]
-        data = dict([(k[4:], v) for k, v in body])
+        data = {k[4:]: v for k, v in body}
         self.instance.pubsubhubbub(**data)
         assert self.session.post.called is False
 
@@ -460,7 +460,7 @@ class TestGitHub(helper.UnitHelper):
         body = [('hub.mode', ''),
                 ('hub.topic', ''),
                 ('hub.callback', 'https://localhost/post')]
-        data = dict([(k[4:], v) for k, v in body])
+        data = {k[4:]: v for k, v in body}
         self.instance.pubsubhubbub(**data)
         assert self.session.post.called is False
 
@@ -469,7 +469,7 @@ class TestGitHub(helper.UnitHelper):
         body = [('hub.mode', 'subscribe'),
                 ('hub.topic', ''),
                 ('hub.callback', 'https://localhost/post')]
-        data = dict([(k[4:], v) for k, v in body])
+        data = {k[4:]: v for k, v in body}
         self.instance.pubsubhubbub(**data)
         assert self.session.post.called is False
 
