@@ -68,7 +68,7 @@ class TestRelease(UnitHelper):
                 'text/plain', 'test_repos_release.py', content,
             )
             self.post_called_with(
-                url_for('/1/assets?name=%s' % 'test_repos_release.py'),
+                url_for('/1/assets?name={0!s}'.format('test_repos_release.py')),
                 data=content,
                 headers={
                     'Content-Type': 'text/plain'
@@ -84,7 +84,7 @@ class TestRelease(UnitHelper):
                 'text/plain', 'test_repos_release.py', content, 'test-label'
             )
             self.post_called_with(
-                url_for('/1/assets?name=%s&label=%s' % (
+                url_for('/1/assets?name={0!s}&label={1!s}'.format(
                     'test_repos_release.py', 'test-label')),
                 data=content,
                 headers={
