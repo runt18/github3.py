@@ -42,7 +42,7 @@ def timestamp_parameter(timestamp, allow_none=True):
                               " formatted date") % timestamp)
         return timestamp
 
-    raise ValueError("Cannot accept type %s for timestamp" % type(timestamp))
+    raise ValueError("Cannot accept type {0!s} for timestamp".format(type(timestamp)))
 
 
 class UTC(datetime.tzinfo):
